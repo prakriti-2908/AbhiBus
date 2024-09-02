@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.search-container{
+    height: 80vh;
+    width: 100vw;
+    position: fixed;
+}
+
+.search-bg-img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: url(https://static.abhibus.com/web/media/backgrounds/search.20230915.webp);
+    background-position: top;
+}
+
+.search-form-container{
+    position: relative;
+    top: 5rem;
+    left: 4.5rem;
+}
+
+.search-form-container h1{
+    line-height: 1.2;
+    font-family: 'Roboto', sans-sarif;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: #353535;
+    text-align: justify;
+    padding-left: 32rem;
+}
+
+
+
+.search-form{
+    display: flex;
+    background-color: #fff;
+    width: 90vw;
+    padding: 1rem 0rem;
+    border-radius: 1rem;
+    justify-content: space-evenly;
+    align-items: center;
+    
+
+    .search-input{
+        border: 1px solid #F2F2F2;
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        column-gap: 8px;
+        padding: 1rem;
+        height: 70px;
+
+
+        input{
+            border: none;
+            font-size: large;
+            font-family: "Roboto",sans-serif;
+        }
+        input::placeholder{
+            color: #B7B0B2;
+            font-size: medium;
+        }
+        input:focus{
+            outline: none;
+        }
+    }
+
+
+    .today-tomorrow-btn{
+        display: flex;
+        column-gap: 1rem;
+    }
+
+    .search-date{
+        input{
+            cursor: text;
+        }
+        button{
+            background-color: #F3F1F1;
+            border: none;
+            min-height: 40px;
+            padding: 0px 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: medium;
+        }
+        button:hover{
+            background-color: #FAEAEA;
+            color: #E29EAD;
+        }
+    }
+    .search-button{
+        background-color: #DC635B;
+        color: white;
+        font-weight: 500;
+        font-size: large;
+        padding: 10px;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.8rem 2rem;
+        cursor: pointer;
+    }
+    .search-button:hover{
+        background-color: #A34940;
+    }
+}
+
