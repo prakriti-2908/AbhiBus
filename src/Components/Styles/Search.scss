@@ -24,6 +24,10 @@
     position: relative;
     top: 5rem;
     left: 4.5rem;
+
+    .material-icons{
+        cursor:default;
+    }
 }
 
 .search-form-container h1{
@@ -109,6 +113,7 @@
         border-radius: 0.5rem;
         padding: 0.8rem 2rem;
         cursor: pointer;
+
     }
     .search-button:hover{
         background-color: #A34940;
@@ -143,7 +148,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
-    width: 15vw;
+    width: 20vw;
 
     .singleCity{
         text-align: left;
@@ -165,60 +170,120 @@
 
 .source-city-div{
     position: absolute;
-    top: 20rem;
-    left: 8rem;
+    top: 14.5rem;
+    left: 5.5rem;
 }
 
 .destination-city-div{
     position: absolute;
-    top: 20rem;
-    left: 30rem;
+    top: 14.5rem;
+    left: 26.7rem;
 }
 
+.search-mobile-container{
+    .oranger-div{
+        background-color: #DC635B;
+        width: 100vw;
+        height: 38vh;
+        border-bottom-left-radius: 5rem;
+        border-bottom-right-radius: 5rem;
+    }
+    .search-form-mobile{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        background-color: white;
+        padding: 1.5rem 0.2rem;
+        border-radius: 1rem;
+        top: 7rem;
+        left: 0.5rem;
+        box-shadow: 0 2px 5px rgba(211, 211, 211, 0.5), 0 -2px 5px rgba(211, 211, 211, 0.5), 2px 0 5px rgba(211, 211, 211, 0.5), -2px 0 5px rgba(211, 211, 211, 0.5);
+        hr{
+            width: 57vw;
+            color: #616161;
+        }
+        .swap-icon{
+            position: absolute;
+            top: 4rem;
+            right: 0.6rem;
+            color: white;
+            background-color:#DC635B;
+            padding: 0.7rem;
+            border-radius: 50%;
+            font-size: 24px;
+            transform: rotate(90deg);
+        }
+        .select-city{
+            display: flex;
+            justify-content: left;
+            width: 93vw;
+            padding: 1rem;
+            column-gap: 0.5rem;
+
+            span{
+                color: #616161;
+            }
+            p{
+                color: #B7B0B2;
+                font-size: 25px;
+            }
+        }
+        .select-date{
+            display: flex;
+            flex-direction: column;
+            row-gap: 1rem;
+            margin-bottom: 1rem;
+            p{
+                width: 71vw;
+                text-align: left;
+                font-size: small;
+            }
+            .date-p{
+                border: 1px solid #BFBFBF;
+                padding: 1rem;
+                border-radius: 1rem;
+                text-align: center;
+            }
+            .calendar{
+                position: absolute;
+                top: 12rem;
+                left: 4rem;
+            }
+              
+        }
+        .search-button{
+            background-color: #DC635B;
+            color: white;
+            font-weight: 500;
+            font-size: large;
+            padding: 7px;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.8rem 2rem;
+            cursor: pointer;
+            position: absolute;
+            top: 15rem;
+        }
+    }
+}
+
+.mobile-search-component{
+    display: none;
+}
+.desktop-search-component{
+    display: block;
+}
+  
 @media screen and (max-width: 767px) {
-    .search-bg-img{
+    .desktop-search-component{
         display: none;
     }
-    .search-form-container h1{
-        padding-left: 5%;
-        margin-left: 1.8rem;
-        font-size: 35px;
-        color: white;
-        max-width: 200vw;
-    }
-    .search-form{
-        margin-left: -11%;
-        border: 1px solid #E8E8E8;
-        width: 153vw;
-        flex-direction: column;
-        row-gap: 1rem;
-        box-shadow: 0px 1px 2px #E8E8E8, 1px 0px 2px #E8E8E8, 0px -1px 2px #E8E8E8, -1px 0px 2px #E8E8E8;
-    }
-    .search-input input{
-        font-size: large;
-    }
-    .search-input{
-        width: 90%;
-    }
-    .search-button{
-        width: 70%;
-    }
-    .search-container{
-        background-color: #DC635B;
-        width: 166vw;
-        height: 42%;
-        border-bottom-right-radius: 2rem;
-        border-bottom-left-radius: 2rem;
+    .mobile-search-component{
+        display: block;
     }
     .search-city-div{
-        width: 61vw;
-    }
-    .destination-city-div{
-        top: 29rem;
-        left: 8rem;
-    }
-    .desktop{
-        display: none;
+        width: 86vw !important;
     }
 }
 
@@ -227,7 +292,7 @@
         width: 117%;
     }
     .search-form-container h1{
-        padding-left: 14.5rem;
+        padding-left: 15rem;
     }
     .search-form{
         border: 1px solid #F2F2F2;
@@ -237,6 +302,9 @@
     }
     .source-city-div{
         left: 6rem;
+    }
+    .search-form-container{
+        left: 2.5rem;
     }
 }
 
