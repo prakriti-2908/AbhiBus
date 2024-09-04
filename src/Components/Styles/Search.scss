@@ -36,8 +36,6 @@
     padding-left: 32rem;
 }
 
-
-
 .search-form{
     display: flex;
     background-color: #fff;
@@ -46,7 +44,7 @@
     border-radius: 1rem;
     justify-content: space-evenly;
     align-items: center;
-    
+    flex-wrap: wrap;
 
     .search-input{
         border: 1px solid #F2F2F2;
@@ -68,10 +66,13 @@
             font-size: medium;
         }
         input:focus{
-            outline: none;
+            outline:none;
         }
     }
 
+    .search-input:focus{
+        border: 1px solid #DFA09E !important;
+    }
 
     .today-tomorrow-btn{
         display: flex;
@@ -79,6 +80,8 @@
     }
 
     .search-date{
+        display: flex;
+        flex-wrap: wrap;
         input{
             cursor: text;
         }
@@ -91,7 +94,7 @@
             cursor: pointer;
             font-size: medium;
         }
-        button:hover{
+        button:hover, button:focus{
             background-color: #FAEAEA;
             color: #E29EAD;
         }
@@ -112,3 +115,129 @@
     }
 }
 
+.ant-picker {
+    border-color: #d9d9d9; 
+}
+.ant-picker:hover {
+    border-color: #DC635B;
+}
+.ant-picker-focused {
+    border-color: #DC635B !important;
+    box-shadow: 0 0 0 2px rgba(235, 162, 162, 0.2) !important; 
+}
+.ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+    border-color: #A34940 !important; 
+}
+.ant-picker-cell-selected .ant-picker-cell-inner {
+    background-color: #DC635B !important;
+    color: white; 
+}
+
+.search-city-div{
+    box-shadow: 0px 1px 2px #E8E8E8, 1px 0px 2px #E8E8E8, 0px -1px 2px #E8E8E8, -1px 0px 2px #E8E8E8;
+    background-color: white;
+    padding: 8px 15px;
+    max-height: 15rem;
+    overflow-y: scroll;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    width: 15vw;
+
+    .singleCity{
+        text-align: left;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        .city-name{
+            font-size: large;
+            line-height: 2;
+        }
+    
+        .state-name{
+            font-size: small;
+        }
+    }:hover{
+        background-color: #FDF5F3;
+    }
+}
+
+.source-city-div{
+    position: absolute;
+    top: 20rem;
+    left: 8rem;
+}
+
+.destination-city-div{
+    position: absolute;
+    top: 20rem;
+    left: 30rem;
+}
+
+@media screen and (max-width: 767px) {
+    .search-bg-img{
+        display: none;
+    }
+    .search-form-container h1{
+        padding-left: 5%;
+        margin-left: 1.8rem;
+        font-size: 35px;
+        color: white;
+        max-width: 200vw;
+    }
+    .search-form{
+        margin-left: -11%;
+        border: 1px solid #E8E8E8;
+        width: 153vw;
+        flex-direction: column;
+        row-gap: 1rem;
+        box-shadow: 0px 1px 2px #E8E8E8, 1px 0px 2px #E8E8E8, 0px -1px 2px #E8E8E8, -1px 0px 2px #E8E8E8;
+    }
+    .search-input input{
+        font-size: large;
+    }
+    .search-input{
+        width: 90%;
+    }
+    .search-button{
+        width: 70%;
+    }
+    .search-container{
+        background-color: #DC635B;
+        width: 166vw;
+        height: 42%;
+        border-bottom-right-radius: 2rem;
+        border-bottom-left-radius: 2rem;
+    }
+    .search-city-div{
+        width: 61vw;
+    }
+    .destination-city-div{
+        top: 29rem;
+        left: 8rem;
+    }
+    .desktop{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .search-bg-img{
+        width: 117%;
+    }
+    .search-form-container h1{
+        padding-left: 14.5rem;
+    }
+    .search-form{
+        border: 1px solid #F2F2F2;
+    }
+    .search-city-div{
+        width: 30vw;
+    }
+    .source-city-div{
+        left: 6rem;
+    }
+}
+
+  

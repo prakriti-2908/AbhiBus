@@ -4,13 +4,13 @@
     padding: 1rem 4rem;
     display: flex;
     justify-content: space-around;
-    column-gap: 5px;
+    column-gap: 50px;
 }
 
 .header-left{
     display: flex;
     justify-content: space-between;
-    width: 60%;
+    width: 50%;
 
     svg{
         cursor: pointer;
@@ -38,7 +38,7 @@
 }
 
 .header-right{
-    width: 40%;
+    width: 50%;
     ul{
         display: flex;
         column-gap: 14px;
@@ -54,5 +54,34 @@
         li:hover{
             background-color: #fafafa;
         }
+    }
+}
+
+@media screen and (max-width: 767px){
+
+    .header-left, .header-right{
+        color: white;
+        .logo{
+            display: none;
+        }
+    }
+    .header-right{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px){
+
+    .header-left, .header-right{
+        color: white;
+        ul{
+            column-gap: 0rem;
+        }
+        .logo{
+            display: none;
+        }
+    }
+    .header{
+        column-gap: 3rem;
     }
 }

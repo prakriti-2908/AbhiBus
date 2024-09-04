@@ -1,12 +1,13 @@
-// import "../Styles/Header.scss";
-import "../Styles/Header.scss";
+import "./Styles/Header.scss";
+
 
 const Header = () => {
   return (
     <div className="header">
+      
       <div className="header-left">
         {/* abhibus logo */}
-        <svg
+        <svg className="logo"
           xmlns="http://www.w3.org/2000/svg"
           width="126px"
           height="27.52px"
@@ -26,8 +27,7 @@ const Header = () => {
             />
           </g>
         </svg>
-        {/* trusted by 5 crore ,svg */}
-        <svg
+        <svg className="logo"
           xmlns="http://www.w3.org/2000/svg"
           width="86.8px"
           height="35px"
