@@ -1,11 +1,15 @@
+import { Provider } from "react-redux";
 import "./App.css";
 import SearchPage from "./Pages/SearchPage";
+import store from "./redux/store";
 
 function App() {
   return (
-    <div className="App">
-      <SearchPage />
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <SearchPage />
+      </div>
+    </Provider>
   );
 }
 

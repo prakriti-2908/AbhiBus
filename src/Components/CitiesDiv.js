@@ -1,4 +1,4 @@
-const CitiesDiv = ({ cityState, onCityClick }) => {
+const CitiesDiv = ({ cityState, onCityClick, identifier }) => {
   return (
     <div className="search-city-div">
       {cityState.map((city, index) => (

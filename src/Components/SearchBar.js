@@ -1,23 +1,55 @@
 import { useEffect, useState } from "react";
-import "../Components/Styles/Search.scss";
+import "../Components/Styles/SearchBar.scss";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { SwapOutlined, EnvironmentOutlined, CalendarOutlined, CarOutlined } from "@ant-design/icons";
+import {
+  SwapOutlined,
+  EnvironmentOutlined,
+  CalendarOutlined,
+  CarOutlined,
+} from "@ant-design/icons";
 import CitiesDiv from "./CitiesDiv";
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addSourceCity,
+  addDestinationCity,
+  addDate,
+} from "../redux/searchSlice";
 dayjs.extend(customParseFormat);
 
-const cityData = ["Hyderabad", "Banglore", "Chennai", "Delhi", "Jaipur"];
 
-const SearchComponent = () => {
+const SearchBar = () => {
+
+  const suggestions = useSelector((state) => state);
   const [sourceVisibility, setSourceVisibility] = useState(false);
   const [destinationVisibility, setDestinationVisibility] = useState(false);
   const [today, setToday] = useState(dayjs());
   const [sourceCity, setSourceCity] = useState("");
   const [destinationCity, setDestinationCity] = useState("");
-  const [SourceCityList, setSourceCityList] = useState([...cityData]);
-  const [DestiCityList, setDestiCityList] = useState([...cityData]);
+  const [SourceCityList, setSourceCityList] = useState([
+    ...suggestions.search.cities,
+  ]);
+  const [DestiCityList, setDestiCityList] = useState([
+    ...suggestions.search.cities,
+  ]);
+  const dispatch = useDispatch();
+
+  const getSuggestion = (identifier, cityVal) => {
+    cityVal = cityVal.toLowerCase();
+    if (identifier === "source") {
+      const filterEdCities = suggestions.search.cities.filter((city) => {
+        return city.toLowerCase() !== cityVal;
+      });
+      setDestiCityList([...filterEdCities]);
+    } else if (identifier === "destination") {
+      const filterEdCities = suggestions.search.cities.filter((city) => {
+        return city.toLowerCase() !== cityVal;
+      });
+      setSourceCityList([...filterEdCities]);
+    }
+    return;
+  };
 
   const todayDate = dayjs();
   const maxDate = todayDate.add(3, "month");
@@ -40,44 +72,58 @@ const SearchComponent = () => {
     };
   }, []);
 
+  const onDateChange = (date) => {
+    setToday(date);
+    dispatch(addDate(date.unix()));
+  };
+
   const handleCityClick = (city) => {
     if (sourceVisibility) {
+      dispatch(addSourceCity(city));
       setSourceCity(city);
+      getSuggestion("source", city);
       setSourceVisibility(false);
     } else if (destinationVisibility) {
+      dispatch(addDestinationCity(city));
       setDestinationCity(city);
+      getSuggestion("destination", city);
       setDestinationVisibility(false);
     }
   };
 
   const handleTodayClick = () => {
     setToday(dayjs());
+    dispatch(addDate(today.unix()));
   };
 
   const handleTomorrowClick = () => {
     setToday(dayjs().add(1, "day"));
+    dispatch(addDate(today.unix()));
   };
 
-  const handelSourceSearch = (e) => {
+  const handelSearch = (type, e) => {
     const searchVal = e.target.value.toLowerCase();
-    const filterdCities = cityData.filter((city) =>
-      city.toLowerCase().includes(searchVal)
-    );
-    setSourceCityList([...filterdCities]);
-  };
 
-  const handelDestiSearch = (e) => {
-    const searchVal = e.target.value.toLowerCase();
-    const filterdCities = cityData.filter((city) =>
-      city.toLowerCase().includes(searchVal)
-    );
-    setDestiCityList([...filterdCities]);
+    if (type === "source") {
+      const filteredCities = suggestions.search.cities.filter(
+        (city) =>
+          city.toLowerCase().includes(searchVal) &&
+          city.toLowerCase() !== destinationCity.toLowerCase()
+      );
+      setSourceCityList(filteredCities);
+    } else if (type === "destination") {
+      const filteredCities = suggestions.search.cities.filter(
+        (city) =>
+          city.toLowerCase().includes(searchVal) &&
+          city.toLowerCase() !== sourceCity.toLowerCase()
+      );
+      setDestiCityList(filteredCities);
+    }
   };
 
   return (
     <div>
       <form action="">
-        <div className="search-bg-img"></div>
         <div className="search-form-container">
           <h1>Book Bus Tickets</h1>
           <div className="search-form">
@@ -86,19 +132,28 @@ const SearchComponent = () => {
               className="search-input source-city-input"
               onClick={() => {
                 setSourceVisibility(true);
+                setDestinationVisibility(false);
               }}
-              onKeyUp={handelSourceSearch}
+              onKeyUp={(e) => handelSearch("source", e)}
             >
               <CarOutlined
-                style={{ fontSize: "24px", marginRight: "8px", color: "#616161" }}
+                style={{
+                  fontSize: "24px",
+                  marginRight: "8px",
+                  color: "#616161",
+                }}
               />
               <input
                 type="text"
                 name="source-city-input"
                 id="source-city-input"
                 placeholder="From Station"
-                value={sourceCity}
-                onChange={(e) => setSourceCity(e.target.value)}
+                value={suggestions.search.sourceCity?suggestions.search.sourceCity:sourceCity}
+                onChange={(e) => {
+                  const cityVal = e.target.value;
+                  setSourceCity(cityVal);
+                  getSuggestion("source", destinationCity);
+                }}
               />
             </div>
 
@@ -119,19 +174,28 @@ const SearchComponent = () => {
               className="search-input destination-city-input"
               onClick={() => {
                 setDestinationVisibility(true);
+                setSourceVisibility(false);
               }}
-              onKeyUp={handelDestiSearch}
+              onKeyUp={(e) => handelSearch("destination", e)}
             >
               <EnvironmentOutlined
-                style={{ fontSize: "24px", marginRight: "8px", color: "#616161" }}
+                style={{
+                  fontSize: "24px",
+                  marginRight: "8px",
+                  color: "#616161",
+                }}
               />
               <input
                 type="text"
                 name="destination-city-input"
                 id="destination-city-input"
                 placeholder="To Station"
-                value={destinationCity}
-                onChange={(e) => setDestinationCity(e.target.value)}
+                value={suggestions.search.destinationCity?suggestions.search.destinationCity:destinationCity}
+                onChange={(e) => {
+                  const cityVal = e.target.value;
+                  setDestinationCity(cityVal);
+                  getSuggestion("destination", sourceCity);
+                }}
               />
             </div>
 
@@ -155,9 +219,7 @@ const SearchComponent = () => {
                   }}
                   minDate={todayDate}
                   maxDate={maxDate}
-                  onChange={(e) => {
-                    setToday(e);
-                  }}
+                  onChange={onDateChange}
                 />
               </div>
               <div className="today-tomorrow-btn">
@@ -176,16 +238,25 @@ const SearchComponent = () => {
 
       <div className="source-city-div city-div">
         {sourceVisibility && (
-          <CitiesDiv cityState={SourceCityList} onCityClick={handleCityClick} />
+          <CitiesDiv
+            cityState={SourceCityList}
+            identifier={"source"}
+            onCityClick={handleCityClick}
+          />
         )}
       </div>
+
       <div className="destination-city-div city-div">
         {destinationVisibility && (
-          <CitiesDiv cityState={DestiCityList} onCityClick={handleCityClick} />
+          <CitiesDiv
+            cityState={DestiCityList}
+            identifier={"destination"}
+            onCityClick={handleCityClick}
+          />
         )}
       </div>
     </div>
   );
 };
 
-export default SearchComponent;
+export default SearchBar;
