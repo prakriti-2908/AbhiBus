@@ -158,7 +158,7 @@ const SearchBarMobile = () => {
               />
             </div>
             <p className="date-p">
-              {epochToDate(suggestions.search.date) ||
+              {suggestions.search.date?epochToDate(suggestions.search.date) :
                 today.format("DD/MM/YYYY")}
             </p>
           </div>
@@ -219,8 +219,8 @@ const SearchBarMobile = () => {
         width="100%"
       >
         <DatePicker
-          defaultValue={today}
-          value={today}
+          defaultValue={suggestions.search.date?dayjs.unix(suggestions.search.date):today}
+          value={suggestions.search.date?dayjs.unix(suggestions.search.date):today}
           disableDate={(current) => {
             return current && current < todayDate.startOf("day");
           }}

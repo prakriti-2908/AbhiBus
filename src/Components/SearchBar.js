@@ -18,9 +18,7 @@ import {
 } from "../redux/searchSlice";
 dayjs.extend(customParseFormat);
 
-
 const SearchBar = () => {
-
   const suggestions = useSelector((state) => state);
   const [sourceVisibility, setSourceVisibility] = useState(false);
   const [destinationVisibility, setDestinationVisibility] = useState(false);
@@ -148,7 +146,11 @@ const SearchBar = () => {
                 name="source-city-input"
                 id="source-city-input"
                 placeholder="From Station"
-                value={suggestions.search.sourceCity?suggestions.search.sourceCity:sourceCity}
+                value={
+                  suggestions.search.sourceCity
+                    ? suggestions.search.sourceCity
+                    : sourceCity
+                }
                 onChange={(e) => {
                   const cityVal = e.target.value;
                   setSourceCity(cityVal);
@@ -190,7 +192,11 @@ const SearchBar = () => {
                 name="destination-city-input"
                 id="destination-city-input"
                 placeholder="To Station"
-                value={suggestions.search.destinationCity?suggestions.search.destinationCity:destinationCity}
+                value={
+                  suggestions.search.destinationCity
+                    ? suggestions.search.destinationCity
+                    : destinationCity
+                }
                 onChange={(e) => {
                   const cityVal = e.target.value;
                   setDestinationCity(cityVal);
@@ -212,8 +218,8 @@ const SearchBar = () => {
                   }}
                 />
                 <DatePicker
-                  defaultValue={today}
-                  value={today}
+                  defaultValue={suggestions.search.date?dayjs.unix(suggestions.search.date):today}
+                  value={suggestions.search.date?dayjs.unix(suggestions.search.date):today}
                   disableDate={(current) => {
                     return current && current < todayDate.startOf("day");
                   }}
